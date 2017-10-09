@@ -1,15 +1,14 @@
 package betaphorDB
 
 import (
+	"bufio"
 	"bytes"
 	"database/sql"
 	"fmt"
 	"log"
 	"os"
 	"os/exec"
-	// "strconv"
-	"bufio"
-	// "regexp"
+	"os/user"
 	"strings"
 
 	shellwords "github.com/mattn/go-shellwords"
@@ -18,20 +17,25 @@ import (
 
 // prepare and return sqlite3 database
 func PrepareDB() *sql.DB {
-	db, err1 := sql.Open("sqlite3", "./betaphor.sqlite3")
+	usr, err1 := user.Current()
 	if err1 != nil {
 		log.Fatal(err1.Error())
 		os.Exit(1)
 	}
-	createTable, err2 := db.Prepare("CREATE TABLE IF NOT EXISTS `aliases` (`alias` TEXT PRIMARY KEY, `command` TEXT NOT NULL)")
+	db, err2 := sql.Open("sqlite3", usr.HomeDir+"/.betaphor")
 	if err2 != nil {
 		log.Fatal(err2.Error())
 		os.Exit(2)
 	}
-	_, err3 := createTable.Exec()
+	createTable, err3 := db.Prepare("CREATE TABLE IF NOT EXISTS `aliases` (`alias` TEXT PRIMARY KEY, `command` TEXT NOT NULL)")
 	if err3 != nil {
 		log.Fatal(err3.Error())
 		os.Exit(3)
+	}
+	_, err4 := createTable.Exec()
+	if err4 != nil {
+		log.Fatal(err4.Error())
+		os.Exit(4)
 	}
 	return db
 }
@@ -139,15 +143,6 @@ func ExecAlias(alias string) {
 	command := commandWithAlias(alias)
 	args, _ := shellwords.Parse(command)
 	cmd := exec.Command(args[0], args[1:]...)
-	// if isUrl, _ := regexp.MatchString("^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$",
-	// 	command); isUrl {
-	// 	cmd = exec.Command("open", command)
-	// } else if isAppPath, _ := regexp.MatchString("^/.+\\.app$", command); isAppPath {
-	// 	cmd = exec.Command("open", command)
-	// } else {
-	// 	cmd = exec.Command("osascript", "-e", "quit app \"ShadowsocksX\"")
-	// 	// cmd = exec.Command(command)
-	// }
 
 	var out bytes.Buffer
 	cmd.Stdout = &out
