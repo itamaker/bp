@@ -1,7 +1,7 @@
 package main
 
 import (
-	"betaphorDB"
+	"betaphor/betaphorDB"
 	"fmt"
 	"os"
 )
