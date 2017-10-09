@@ -1,7 +1,7 @@
 package main
 
 import (
-	"betaphor/betaphorDB"
+	"bp/betaphorDB"
 	"fmt"
 	"os"
 )
@@ -34,6 +34,8 @@ func main() {
 		}
 		alias := os.Args[2]
 		betaphorDB.RemoveAlias(alias)
+	case "reset":
+		betaphorDB.RemoveAllAliases()
 	default:
 		alias := operation
 		betaphorDB.ExecAlias(alias)

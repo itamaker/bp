@@ -2,6 +2,12 @@
 
 
 [[projects]]
+  name = "github.com/mattn/go-shellwords"
+  packages = ["."]
+  revision = "02e3cf038dcea8290e44424da473dd12be796a8a"
+  version = "v1.0.3"
+
+[[projects]]
   name = "github.com/mattn/go-sqlite3"
   packages = ["."]
   revision = "3b3f1d01b2696af5501697c35629048c227586ab"
@@ -10,6 +16,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "54360e3a0e6869bf3d585bb7c088c52fd4ca665e68ac1b5630715311833f9679"
+  inputs-digest = "e3d1de95cc99968b78bdf7f9beba0ae122a86653ca16fd5568a2fbd2c4f22cd0"
   solver-name = "gps-cdcl"
   solver-version = 1
