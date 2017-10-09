@@ -2,6 +2,7 @@ package main
 
 import (
 	"betaphorDB"
+	"fmt"
 	"os"
 )
 
@@ -21,12 +22,26 @@ func init() {
 // }
 
 func main() {
+	if len(os.Args) < 2 {
+		fmt.Println("ERROR: no operation specified")
+		fmt.Println("Usage: betaphor <operation> [arguments]")
+		os.Exit(1)
+	}
+
 	operation := os.Args[1]
 	switch operation {
 	case "add":
 		betaphorDB.PromptNewAlias()
 	case "ls":
 		betaphorDB.ListAliases()
+	case "rm":
+		if len(os.Args) != 3 {
+			fmt.Println("ERROR: alias name not specified")
+			fmt.Println("Usage: betaphor rm <alias>")
+			os.Exit(1)
+		}
+		alias := os.Args[2]
+		betaphorDB.RemoveAlias(alias)
 	}
 	// database, _ := sql.Open("sqlite3", "./nraboy.db")
 	// statement1, _ := database.Prepare("CREATE TABLE IF NOT EXISTS people (id INTEGER PRIMARY KEY, firstname TEXT, lastname TEXT)")
