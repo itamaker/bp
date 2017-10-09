@@ -11,14 +11,6 @@ func init() {
 }
 
 // func main() {
-// 	cmd := exec.Command("pwd")
-// 	var out bytes.Buffer
-// 	cmd.Stdout = &out
-// 	err := cmd.Run()
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
-// 	fmt.Printf("%s", out.String())
 // }
 
 func main() {
@@ -42,6 +34,9 @@ func main() {
 		}
 		alias := os.Args[2]
 		betaphorDB.RemoveAlias(alias)
+	default:
+		alias := operation
+		betaphorDB.ExecAlias(alias)
 	}
 	// database, _ := sql.Open("sqlite3", "./nraboy.db")
 	// statement1, _ := database.Prepare("CREATE TABLE IF NOT EXISTS people (id INTEGER PRIMARY KEY, firstname TEXT, lastname TEXT)")
