@@ -2,6 +2,7 @@ package main
 
 import (
 	"bp/betaphorDB"
+	"bp/help"
 	"fmt"
 	"os"
 )
@@ -19,6 +20,8 @@ func main() {
 
 	operation := os.Args[1]
 	switch operation {
+	case "help":
+		help.PrintHelpInfo()
 	case "add":
 		betaphorDB.PromptNewAlias()
 	case "ls":
