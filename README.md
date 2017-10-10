@@ -1,6 +1,6 @@
 # betaphor
 
-Betaphor(bp) is a light weight command line tool trying to make your daily work more efficient. It works like `alias` except that no `~/.bashrc`,  `~/.zshrc` modification and `source ~/.zshrc` operation is ever required.
+Betaphor(bp) is a light weight command line tool trying to make your daily work more efficient. It works like `alias` except that no modifying `~/.bashrc` or  `~/.zshrc` and no `source ~/.zshrc` is ever required.
 
 By now, it's for macOS ONLY.
 
