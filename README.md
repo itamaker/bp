@@ -8,9 +8,7 @@ By now, it's for macOS ONLY.
 
 #### 1. manually (from source code)
 
-* Install Golang (>=1.9.1)
-
-follow instructions on [golang.org](https://golang.org)
+* Install Golang (>=1.9.1), follow instructions on [golang.org](https://golang.org)
 
 * Clone project and install
 
