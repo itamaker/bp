@@ -56,7 +56,7 @@ func main() {
 		}
 		alias := os.Args[2]
 		betaphorDB.RemoveAlias(alias)
-	case "reset":
+	case "rmAll":
 		betaphorDB.RemoveAllAliases()
 	default:
 		alias := operation
