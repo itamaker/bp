@@ -4,6 +4,32 @@ Betaphor(bp) is a light weight command line tool trying to make your daily work 
 
 By now, it's for macOS ONLY.
 
+## installation & uninstallation
+
+#### 1. manually (from source code)
+
+* Install Golang (>=1.9.1)
+
+follow instructions on [golang.org](https://golang.org)
+
+* Clone project and install
+
+```shell
+$ git clone https://github.com/keyOfVv/bp.git
+$ cd path/to/bp
+$ ./install.sh
+```
+
+* Uninstall
+
+```shell
+$ cd path/to/bp
+$ ./uninstall.sh
+```
+
+
+#### 2. homebrew - Comming soon.
+
 ## usage
 
 #### 1. New bp shortcut
