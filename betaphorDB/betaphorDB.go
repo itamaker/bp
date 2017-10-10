@@ -24,7 +24,6 @@ package betaphorDB
 
 import (
 	"bufio"
-	"bytes"
 	"database/sql"
 	"fmt"
 	"log"
@@ -166,11 +165,23 @@ func ExecAlias(alias string) {
 	args, _ := shellwords.Parse(command)
 	cmd := exec.Command(args[0], args[1:]...)
 
-	var out bytes.Buffer
-	cmd.Stdout = &out
-	err := cmd.Run()
+	stdout, err := cmd.StdoutPipe()
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("%s", out.String())
+
+	// start the command after having set up the pipe
+	if err := cmd.Start(); err != nil {
+		log.Fatal(err)
+	}
+
+	// read command's stdout line by line
+	in := bufio.NewScanner(stdout)
+
+	for in.Scan() {
+		fmt.Println(in.Text()) // write each line to your log, or anything you need
+	}
+	if err := in.Err(); err != nil {
+		log.Printf("error: %s", err)
+	}
 }
