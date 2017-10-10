@@ -30,7 +30,7 @@ $ ./update.sh
 
 ## Usage
 
-#### 1. New bp shortcut
+#### 1. new bp shortcut
 
 * add shortcut for specific webpage
 
