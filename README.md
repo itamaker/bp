@@ -24,7 +24,7 @@ $ ./install.sh
 ## Update
 
 ```shell
-$ cd ~/go/src/bp
+$ cd ~/go/src/bp
 $ ./update.sh
 ```
 
