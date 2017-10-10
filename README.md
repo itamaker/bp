@@ -36,8 +36,8 @@ $ ./update.sh
 
 ```shell
 $ bp add
-$ Enter alias name: ggl
-$ Enter command literal: open https://google.com
+> Enter alias name: ggl
+> Enter command literal: open https://google.com
 ```
 
 * add shorcuts for launch/close specific app
@@ -45,15 +45,15 @@ $ Enter command literal: open https://google.com
 ```shell
 # launch ShadowsocksX from command line
 $ bp add
-$ Enter alias name: sss
-$ Enter command literal: /Applications/ShadowsocksX.app
+> Enter alias name: sss
+> Enter command literal: /Applications/ShadowsocksX.app
 ```
 
 ```shell
 # quit ShadowsocksX from command line
 $ bp add
-$ Enter alias name: kss
-$ Enter command literal: osascript -e 'quit app "ShadowsocksX"'
+> Enter alias name: kss
+> Enter command literal: osascript -e 'quit app "ShadowsocksX"'
 ```
 
 #### 2. use bp shortcut
