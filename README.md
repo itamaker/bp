@@ -14,14 +14,15 @@ By now, it's for macOS ONLY.
 
 ```shell
 $ git clone https://github.com/keyOfVv/bp.git
-$ cd path/to/bp
+$ mv ./bp/ ~/go/src/
+$ cd ~/go/src/bp
 $ ./install.sh
 ```
 
 * Uninstall
 
 ```shell
-$ cd path/to/bp
+$ cd ~/go/src/bp
 $ ./uninstall.sh
 ```
 
