@@ -1,10 +1,10 @@
-# betaphor
+# Betaphor - bp
 
-Betaphor(bp) is a light weight command line tool trying to make your daily work more efficient. It works like `alias` except that no modifying `~/.bashrc` or  `~/.zshrc` and no `source ~/.zshrc` is ever required.
+Betaphor(bp) is a light weight command line tool trying to make your daily work more efficient. It works like `alias` except that no modifying `~/.bashrc` or  `~/.zshrc` and no `source ~/.?shrc` is ever required.
 
 By now, it's for macOS ONLY.
 
-## installation & uninstallation
+## Installation
 
 #### 1. manually (from source code)
 
@@ -15,21 +15,20 @@ By now, it's for macOS ONLY.
 ```shell
 $ git clone https://github.com/keyOfVv/bp.git
 $ mv ./bp/ ~/go/src/
-$ cd ~/go/src/bp
+$ cd ~/go/src/bp
 $ ./install.sh
 ```
 
-* Uninstall
-
-```shell
-$ cd ~/go/src/bp
-$ ./uninstall.sh
-```
-
-
 #### 2. homebrew - Coming soon.
 
-## usage
+## Update
+
+```shell
+$ cd ~/go/src/bp
+$ ./update.sh
+```
+
+## Usage
 
 #### 1. New bp shortcut
 
@@ -57,7 +56,7 @@ $ Enter alias name: kss
 $ Enter command literal: osascript -e 'quit app "ShadowsocksX"'
 ```
 
-#### 2. Use bp shortcut
+#### 2. use bp shortcut
 
 * open webpage
 
@@ -81,12 +80,18 @@ $ bp kss
 $ bp ls
 ```
 
-#### 4. Remove shortcuts
+#### 4. remove shortcut(s)
 
 ```shell
 # remove one specific shortcuts
 $ bp rm sss
 # remove all shortcuts
-$ bp reset
+$ bp rmAll
+```
+## Uninstallation
+
+```shell
+$ cd ~/go/src/bp
+$ ./uninstall.sh
 ```
 
