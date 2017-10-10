@@ -8,7 +8,7 @@ By now, it's for macOS ONLY.
 
 #### 1. manually (from source code)
 
-* Install Golang (>=1.9.1), follow instructions on [golang.org](https://golang.org)
+* Install Golang (>=1.9.1), follow instructions on [golang.org](https://golang.org/dl/)
 
 * Clone project and install
 
@@ -26,7 +26,7 @@ $ ./uninstall.sh
 ```
 
 
-#### 2. homebrew - Comming soon.
+#### 2. homebrew - Coming soon.
 
 ## usage
 
