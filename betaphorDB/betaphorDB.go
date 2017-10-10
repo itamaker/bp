@@ -108,10 +108,12 @@ func ListAliases() {
 	rows, _ := db.Query("SELECT `alias`, `command` FROM `aliases`")
 	var alias string
 	var command string
+	fmt.Println("┌─────")
 	for rows.Next() {
 		rows.Scan(&alias, &command)
-		fmt.Println(alias + ": " + command)
+		fmt.Println("│" + alias + "➜ " + command)
 	}
+	fmt.Println("└─────")
 }
 
 // remove alias
