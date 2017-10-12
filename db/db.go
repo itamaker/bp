@@ -93,34 +93,34 @@ func GetAllAliases() map[string]string {
 }
 
 // remove alias
-func RemoveAlias(alias string) {
+func Delete(alias string) bool {
 	db := PrepareDB()
 	delete, err1 := db.Prepare("DELETE FROM `aliases` WHERE `alias` = ?")
 	if err1 != nil {
 		log.Fatal(err1.Error())
-		os.Exit(1)
+		return false
 	}
 	_, err2 := delete.Exec(alias)
 	if err2 != nil {
 		log.Fatal(err2.Error())
-		os.Exit(2)
+		return false
 	}
-	fmt.Printf("Alias `%s` removed\n", alias)
+	return true
 }
 
-func RemoveAllAliases() {
+func DeleteAll() bool {
 	db := PrepareDB()
 	deleteAll, err1 := db.Prepare("DELETE FROM `aliases`")
 	if err1 != nil {
 		log.Fatal(err1.Error())
-		os.Exit(1)
+		return false
 	}
 	_, err2 := deleteAll.Exec()
 	if err2 != nil {
 		log.Fatal(err2.Error())
-		os.Exit(2)
+		return false
 	}
-	fmt.Println("All aliases removed\n")
+	return true
 }
 
 func commandWithAlias(alias string) string {
