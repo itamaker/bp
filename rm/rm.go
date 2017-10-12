@@ -20,52 +20,26 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
-package main
+package rm
 
 import (
-	"bp/add"
 	"bp/db"
-	"bp/help"
-	"bp/ls"
-	"bp/rm"
 	"fmt"
 	"log"
-	"os"
 )
 
-func init() {
-	db.PrepareDB()
-	log.SetPrefix("TRACE: ")
-	log.SetFlags(log.Lshortfile)
+func Remove(alias string) {
+	if db.Delete(alias) {
+		fmt.Printf("Alias `%s` removed\n", alias)
+	} else {
+		log.Printf("Error occured when removing `%s`.\n", alias)
+	}
 }
 
-func main() {
-	if len(os.Args) < 2 {
-		fmt.Println("ERROR: no operation specified")
-		fmt.Println("Usage: betaphor <operation> [arguments]")
-		os.Exit(1)
-	}
-
-	operation := os.Args[1]
-	switch operation {
-	case "help":
-		help.PrintHelpInfo()
-	case "add":
-		add.PromptNewAlias()
-	case "ls":
-		ls.Output()
-	case "rm":
-		if len(os.Args) != 3 {
-			fmt.Println("ERROR: alias name not specified")
-			fmt.Println("Usage: betaphor rm <alias>")
-			os.Exit(1)
-		}
-		alias := os.Args[2]
-		rm.Remove(alias)
-	case "rmAll":
-		rm.RemoveAll()
-	default:
-		alias := operation
-		db.ExecAlias(alias)
+func RemoveAll() {
+	if db.DeleteAll() {
+		fmt.Println("All aliases removed\n")
+	} else {
+		log.Println("Error occured when removing all alias.\n")
 	}
 }
