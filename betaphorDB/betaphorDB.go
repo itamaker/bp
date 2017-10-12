@@ -103,17 +103,17 @@ func InsertNewAlias(alias string, command string) {
 }
 
 // list all alias
-func ListAliases() {
+func GetAllAliases() map[string]string {
 	db := PrepareDB()
 	rows, _ := db.Query("SELECT `alias`, `command` FROM `aliases`")
 	var alias string
 	var command string
-	fmt.Println("┌─────")
+	aliases := make(map[string]string)
 	for rows.Next() {
 		rows.Scan(&alias, &command)
-		fmt.Println("│" + alias + "➜ " + command)
+		aliases[alias] = command
 	}
-	fmt.Println("└─────")
+	return aliases
 }
 
 // remove alias
