@@ -23,12 +23,12 @@
 package ls
 
 import (
-	"bp/betaphorDB"
+	"bp/db"
 	"bp/formatter"
 )
 
 /// output `bp ls`
 func Output() {
-	aliases := betaphorDB.GetAllAliases()
+	aliases := db.GetAllAliases()
 	formatter.FormatAliasMap(aliases)
 }

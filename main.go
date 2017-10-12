@@ -23,7 +23,7 @@
 package main
 
 import (
-	"bp/betaphorDB"
+	"bp/db"
 	"bp/help"
 	"bp/ls"
 	"fmt"
@@ -31,7 +31,7 @@ import (
 )
 
 func init() {
-	betaphorDB.PrepareDB()
+	db.PrepareDB()
 }
 
 func main() {
@@ -46,7 +46,7 @@ func main() {
 	case "help":
 		help.PrintHelpInfo()
 	case "add":
-		betaphorDB.PromptNewAlias()
+		db.PromptNewAlias()
 	case "ls":
 		ls.Output()
 	case "rm":
@@ -56,11 +56,11 @@ func main() {
 			os.Exit(1)
 		}
 		alias := os.Args[2]
-		betaphorDB.RemoveAlias(alias)
+		db.RemoveAlias(alias)
 	case "rmAll":
-		betaphorDB.RemoveAllAliases()
+		db.RemoveAllAliases()
 	default:
 		alias := operation
-		betaphorDB.ExecAlias(alias)
+		db.ExecAlias(alias)
 	}
 }
