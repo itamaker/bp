@@ -28,11 +28,14 @@ import (
 	"bp/help"
 	"bp/ls"
 	"fmt"
+	"log"
 	"os"
 )
 
 func init() {
 	db.PrepareDB()
+	log.SetPrefix("TRACE: ")
+	log.SetFlags(log.Lshortfile)
 }
 
 func main() {

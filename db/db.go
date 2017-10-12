@@ -159,6 +159,7 @@ func ExecAlias(alias string) {
 	for in.Scan() {
 		fmt.Println(in.Text()) // write each line to your log, or anything you need
 	}
+
 	if err := in.Err(); err != nil {
 		log.Printf("error: %s", err)
 	}
