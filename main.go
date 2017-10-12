@@ -25,6 +25,7 @@ package main
 import (
 	"bp/betaphorDB"
 	"bp/help"
+	"bp/ls"
 	"fmt"
 	"os"
 )
@@ -47,7 +48,7 @@ func main() {
 	case "add":
 		betaphorDB.PromptNewAlias()
 	case "ls":
-		betaphorDB.ListAliases()
+		ls.Output()
 	case "rm":
 		if len(os.Args) != 3 {
 			fmt.Println("ERROR: alias name not specified")
