@@ -102,7 +102,7 @@ func InsertNewAlias(alias string, command string) {
 	fmt.Println(alias + ": " + command)
 }
 
-// list all alias
+// select all aliases, return them in map
 func GetAllAliases() map[string]string {
 	db := PrepareDB()
 	rows, _ := db.Query("SELECT `alias`, `command` FROM `aliases`")
