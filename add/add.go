@@ -20,48 +20,45 @@
 //OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 //SOFTWARE.
 
-package main
+package add
 
 import (
-	"bp/add"
 	"bp/db"
-	"bp/help"
-	"bp/ls"
+	"bufio"
 	"fmt"
+	"log"
 	"os"
+	"strings"
 )
 
-func init() {
-	db.PrepareDB()
-}
-
-func main() {
-	if len(os.Args) < 2 {
-		fmt.Println("ERROR: no operation specified")
-		fmt.Println("Usage: betaphor <operation> [arguments]")
+// add new alias & command
+func AddNew(alias string, command string) {
+	if db.InsertNewAlias(alias, command) {
+		fmt.Println("New alias: command added")
+		fmt.Println(alias + ": " + command)
+	} else {
 		os.Exit(1)
 	}
+}
 
-	operation := os.Args[1]
-	switch operation {
-	case "help":
-		help.PrintHelpInfo()
-	case "add":
-		add.PromptNewAlias()
-	case "ls":
-		ls.Output()
-	case "rm":
-		if len(os.Args) != 3 {
-			fmt.Println("ERROR: alias name not specified")
-			fmt.Println("Usage: betaphor rm <alias>")
-			os.Exit(1)
-		}
-		alias := os.Args[2]
-		db.RemoveAlias(alias)
-	case "rmAll":
-		db.RemoveAllAliases()
-	default:
-		alias := operation
-		db.ExecAlias(alias)
+// prompt for new alias input
+func PromptNewAlias() {
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Print("Enter alias name: ")
+	alias, err1 := reader.ReadString('\n')
+	if err1 != nil {
+		log.Fatal(err1.Error())
+		os.Exit(1)
 	}
+	alias = strings.TrimSpace(alias)
+
+	fmt.Print("Enter command literal: ")
+	command, err2 := reader.ReadString('\n')
+	if err2 != nil {
+		log.Fatal(err2.Error())
+		os.Exit(2)
+	}
+	command = strings.TrimSpace(command)
+
+	AddNew(alias, command)
 }

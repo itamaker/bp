@@ -30,7 +30,6 @@ import (
 	"os"
 	"os/exec"
 	"os/user"
-	"strings"
 
 	shellwords "github.com/mattn/go-shellwords"
 	_ "github.com/mattn/go-sqlite3"
@@ -61,45 +60,22 @@ func PrepareDB() *sql.DB {
 	return db
 }
 
-// prompt for new alias input
-func PromptNewAlias() {
-	reader := bufio.NewReader(os.Stdin)
-	fmt.Print("Enter alias name: ")
-	alias, err1 := reader.ReadString('\n')
-	if err1 != nil {
-		log.Fatal(err1.Error())
-		os.Exit(1)
-	}
-	alias = strings.TrimSpace(alias)
-
-	fmt.Print("Enter command literal: ")
-	command, err2 := reader.ReadString('\n')
-	if err2 != nil {
-		log.Fatal(err2.Error())
-		os.Exit(2)
-	}
-	command = strings.TrimSpace(command)
-
-	InsertNewAlias(alias, command)
-}
-
 // insert new alias
-func InsertNewAlias(alias string, command string) {
+func InsertNewAlias(alias string, command string) bool {
 	db := PrepareDB()
 	insert, err1 := db.Prepare(
 		"INSERT OR REPLACE INTO `aliases` (`alias`, `command`) " +
 			"VALUES (?, ?)")
 	if err1 != nil {
 		log.Fatal(err1.Error())
-		os.Exit(1)
+		return false
 	}
 	_, err2 := insert.Exec(alias, command)
 	if err2 != nil {
 		log.Fatal(err2.Error())
-		os.Exit(2)
+		return false
 	}
-	fmt.Println("New alias: command added")
-	fmt.Println(alias + ": " + command)
+	return true
 }
 
 // select all aliases, return them in map
