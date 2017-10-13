@@ -19,8 +19,6 @@ $ cd ~/go/src/bp
 $ ./install.sh
 ```
 
-#### 2. homebrew - Coming soon.
-
 ## Update
 
 ```shell
