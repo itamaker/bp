@@ -29,6 +29,8 @@ import (
 	"os/exec"
 	"strconv"
 	"strings"
+
+	"github.com/fatih/color"
 )
 
 /// append whitespace to string from left
@@ -63,9 +65,10 @@ func FormatAliasMap(aliases [][]string) {
 		sep = sep + "─"
 	}
 	fmt.Println(sep)
+	yellow := color.New(color.FgYellow).SprintFunc()
 	for _, aliasAndCmd := range aliases {
 		formattedAlias := appendSpaceFromLeft(aliasAndCmd[0])
-		fmt.Println(formattedAlias + " ➜  " + aliasAndCmd[1])
+		fmt.Printf("%s ➜  %s\n", yellow(formattedAlias), aliasAndCmd[1])
 	}
 	fmt.Println(sep)
 }
