@@ -28,3 +28,7 @@
 [[constraint]]
   name = "github.com/mattn/go-shellwords"
   version = "1.0.3"
+
+[[constraint]]
+  name = "github.com/fatih/color"
+  version = "0.1.0"
