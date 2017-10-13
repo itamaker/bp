@@ -79,15 +79,15 @@ func InsertNewAlias(alias string, command string) bool {
 }
 
 // select all aliases, return them in map
-func GetAllAliases() map[string]string {
+func GetAllAliases() [][]string {
 	db := PrepareDB()
 	rows, _ := db.Query("SELECT `alias`, `command` FROM `aliases` ORDER BY `command` ASC;")
 	var alias string
 	var command string
-	aliases := make(map[string]string)
+	aliases := [][]string{}
 	for rows.Next() {
 		rows.Scan(&alias, &command)
-		aliases[alias] = command
+		aliases = append(aliases, []string{alias, command})
 	}
 	return aliases
 }
