@@ -24,6 +24,11 @@ package formatter
 
 import (
 	"fmt"
+	// "log"
+	"os"
+	"os/exec"
+	"strconv"
+	"strings"
 )
 
 /// append whitespace to string from left
@@ -40,12 +45,27 @@ func appendSpaceFromLeft(str string) string {
 	return newStr + str
 }
 
+func getTerminalSize() int {
+	cmd := exec.Command("stty", "size")
+	cmd.Stdin = os.Stdin
+	output, _ := cmd.Output()
+	comp := strings.Split(string(output), " ")
+	widthStr := strings.TrimSpace(comp[1])
+	w, _ := strconv.Atoi(widthStr)
+	return w
+}
+
 /// decorate ls output
-func FormatAliasMap(aliases map[string]string) {
-	fmt.Println("┌─────")
-	for alias, command := range aliases {
-		formattedAlias := appendSpaceFromLeft(alias)
-		fmt.Println("│" + formattedAlias + "➜ " + command)
+func FormatAliasMap(aliases [][]string) {
+	terminalW := getTerminalSize()
+	var sep string
+	for i := 0; i < terminalW; i++ {
+		sep = sep + "─"
 	}
-	fmt.Println("└─────")
+	fmt.Println(sep)
+	for _, aliasAndCmd := range aliases {
+		formattedAlias := appendSpaceFromLeft(aliasAndCmd[0])
+		fmt.Println(formattedAlias + " ➜  " + aliasAndCmd[1])
+	}
+	fmt.Println(sep)
 }
