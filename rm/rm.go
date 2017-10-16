@@ -34,13 +34,13 @@ import (
 func Remove(alias string) {
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Printf("Are you sure to REMOVE `%s`? (y/N): ", alias)
-	stdin, err1 := reader.ReadString('\n')
+	input, err1 := reader.ReadString('\n')
 	if err1 != nil {
 		log.Fatal(err1.Error())
 		os.Exit(1)
 	}
-	stdin = strings.TrimSpace(stdin)
-	switch stdin {
+	input = strings.TrimSpace(input)
+	switch input {
 	case "y", "Y":
 		if db.Delete(alias) {
 			fmt.Printf("Alias `%s` removed\n", alias)
@@ -51,9 +51,20 @@ func Remove(alias string) {
 }
 
 func RemoveAll() {
-	if db.DeleteAll() {
-		fmt.Println("All aliases removed\n")
-	} else {
-		log.Println("Error occured when removing all alias.\n")
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Print("ALL alias(es) will be removed, this operation can't be undone.\nAre you sure? (y/N): ")
+	input, err1 := reader.ReadString('\n')
+	if err1 != nil {
+		log.Fatal(err1.Error())
+		os.Exit(1)
+	}
+	input = strings.TrimSpace(input)
+	switch input {
+	case "y", "Y":
+		if db.DeleteAll() {
+			fmt.Println("All aliases removed\n")
+		} else {
+			log.Println("Error occured when removing all alias.\n")
+		}
 	}
 }
