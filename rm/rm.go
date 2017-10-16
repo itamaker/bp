@@ -24,15 +24,29 @@ package rm
 
 import (
 	"bp/db"
+	"bufio"
 	"fmt"
 	"log"
+	"os"
+	"strings"
 )
 
 func Remove(alias string) {
-	if db.Delete(alias) {
-		fmt.Printf("Alias `%s` removed\n", alias)
-	} else {
-		log.Printf("Error occured when removing `%s`.\n", alias)
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Printf("Are you sure to REMOVE `%s`? (y/N): ", alias)
+	stdin, err1 := reader.ReadString('\n')
+	if err1 != nil {
+		log.Fatal(err1.Error())
+		os.Exit(1)
+	}
+	stdin = strings.TrimSpace(stdin)
+	switch stdin {
+	case "y", "Y":
+		if db.Delete(alias) {
+			fmt.Printf("Alias `%s` removed\n", alias)
+		} else {
+			log.Printf("Error occured when removing `%s`.\n", alias)
+		}
 	}
 }
 

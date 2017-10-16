@@ -29,13 +29,15 @@ import (
 	"log"
 	"os"
 	"strings"
+
+	"github.com/fatih/color"
 )
 
 // add new alias & command
 func AddNew(alias string, command string) {
 	if db.InsertNewAlias(alias, command) {
-		fmt.Println("New alias: command added")
-		fmt.Println(alias + ": " + command)
+		yellow := color.New(color.FgYellow).SprintFunc()
+		fmt.Printf("Added: %s ➜  %s\n", yellow(alias), command)
 	} else {
 		os.Exit(1)
 	}
@@ -52,7 +54,7 @@ func PromptNewAlias() {
 	}
 	alias = strings.TrimSpace(alias)
 
-	fmt.Print("Enter command literal: ")
+	fmt.Print("Enter command: ")
 	command, err2 := reader.ReadString('\n')
 	if err2 != nil {
 		log.Fatal(err2.Error())
